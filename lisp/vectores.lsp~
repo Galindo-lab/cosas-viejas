@@ -1,0 +1,11 @@
+;vectores
+(defun suma(vec-a vec-b)
+  (list
+   (sumar-pos vec-a vec-b 0)
+   (sumar-pos vec-a vec-b 1)))
+
+(defun sumar-pos(a b pos)
+  (+ (nth pos a) (nth pos b)))
+
+(defun restar-pos(a b pos)
+  (- (nth pos a) (nth pos b)))

@@ -1,0 +1,10 @@
+;;; Funciones para convertir de polar a rectangular
+(defun rec (rad) (* rad (/ 180 pi)))
+(defun rad (rec) (/ rec (/ 180 pi)))
+
+#|| Todas las funciones a continuacion definidas deberían
+ser iguales a las que usa la Casio fx-82MS ||#
+(defun ratan (v) (rec (atan v)))
+(defun rcos (v) (cos (rad v)))
+(defun rsin (v) (sin (rad v)))
+

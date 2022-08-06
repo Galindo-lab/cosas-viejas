@@ -1,0 +1,7 @@
+;; tictactoe
+
+(defun tictactoe()
+  "star playing tic tac toe"
+  (interactive) 
+
+   )

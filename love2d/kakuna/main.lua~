@@ -1,0 +1,15 @@
+
+push = require("lib.push")
+
+
+local gameWidth, gameHeight = 1080, 720 --fixed game resolution
+local windowWidth, windowHeight = love.window.getDesktopDimensions()
+windowWidth, windowHeight = windowWidth*.7, windowHeight*.7 --make the window a bit smaller than the screen itself
+
+push:setupScreen(gameWidth, gameHeight, windowWidth, windowHeight, {fullscreen = true})
+
+function love.draw()
+   push:start()
+   love.graphics.print("Hello World!", 400, 300)
+   push:finish()
+end

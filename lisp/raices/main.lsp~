@@ -1,0 +1,9 @@
+
+(defun numerador(a b c)
+  (let ((x (sqrt (- (expt b 2) (* 4 a c)))))
+    (mapcar (lambda (x) (/ (* 2 a)))
+	    (list (- b x) (+ b x)))))
+
+
+(defun formula-general(a b c)
+  (print "hola") )

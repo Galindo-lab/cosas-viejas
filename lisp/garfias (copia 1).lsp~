@@ -1,0 +1,48 @@
+;;; Funciones para convertir de polar a rectangular
+(defun rec (rad) (* rad (/ 180 pi)))
+(defun rad (rec) (/ rec (/ 180 pi)))
+
+#|| Todas las funciones a continuacion definidas deberían
+ser iguales a las que usa la Casio fx-82MS ||#
+(defun ratan (v) (rec (atan v)))
+(defun rcos (v) (cos (rad v)))
+(defun rsin (v) (sin (rad v)))
+
+#|| corregir las coordenadas polares respecto a su cuadrante ||#
+(defun crt(real img)
+  (cond
+   ((and (zerop real) (zerop img)) 0 )
+   ((plusp img) 90)
+   ((minusp img) 270)
+   ((plusp real) 360)
+   ((minusp real) 180)))
+
+(defun quadrant(real img)
+  (cond
+   ((and (plusp  real) (plusp  img)) (+ 0   (ratan (/ img real)) ))    
+   ((and (minusp real) (plusp  img)) (+ 180 (ratan (/ img real)) ))    
+   ((and (minusp real) (minusp img)) (+ 180 (ratan (/ img real)) ))    
+   ((and (plusp  real) (minusp img)) (+ 360 (ratan (/ img real)) ))))  
+
+(defun corregir(real img)
+  (if (or (zerop real) (zerop img))
+      (crt real img)
+    (quadrant real img)))
+
+;;converciones
+(defun pol.rec(amp face)
+  (format t "~{~a:~12t~,4f~%~}~%" (pol->rec amp face)))
+  
+(defun rec.pol(real img)
+  (format t "~{~a:~12t~,4f~%~}~%" (rec->pol real img)))
+
+(defun pol->rec(amp face)
+  (if (minusp amp)
+      (list :real 0 :imaginario 0
+       :error "la amplitud no puede ser un numero negativo")
+    (list
+     :real (* amp (rcos face)) :imaginario (* amp (rsin face))) ))
+
+(defun rec->pol(real img)
+  (list
+   :amplitud (sqrt (+ (expt real 2) (expt img 2))) :face (corregir real img)))

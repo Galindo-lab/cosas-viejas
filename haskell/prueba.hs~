@@ -1,0 +1,2 @@
+module Main (main) where          -- not needed in interpreter, is the default in a module file
+"hola"
