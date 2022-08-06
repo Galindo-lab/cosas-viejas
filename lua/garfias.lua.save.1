@@ -1,0 +1,34 @@
+function math.rec(rad) return rad * (180/math.pi) end
+
+function math.rad(rec) return rec / (180/math.pi) end
+
+function g(ang,exp,test)
+	return (ang + (360*test)) / exp  
+end
+
+function raiz(angulo,exponente)
+	for i=0,exponente-1,1 do
+		print(g(angulo,exponente,i))
+	end
+end
+
+function rct_plr(rl,img)
+ local r = rl^2+img^2
+ local i = math.rec(math.atan(img/rl))
+ print("parte real: sqr("..r..") = "..math.sqrt(r))
+ print("parte img :"..i)
+end
+
+function qdr(real,img)
+	if real>=0 and img>=0 then
+		return 0
+	elseif real<0 and img >=0 then
+		return 180
+	elseif real<0 and img <0 then
+		return 270
+	elseif real>=0 and img<0 then
+		return 360
+	end
+	
+	return "error"
+end

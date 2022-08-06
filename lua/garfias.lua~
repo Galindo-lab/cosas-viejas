@@ -1,0 +1,78 @@
+--[[
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this program.  If not, see <https://www.gnu.org/licenses/>.
+]]
+
+function math.rec(rad) return rad * (180/math.pi) end
+function math.rad(rec) return rec / (180/math.pi) end
+
+function math.ratan(v) return math.atan(math.rad(v)) end
+function math.rcos(v) return math.cos(math.rad(v)) end
+function math.rsin(v) return math.sin(math.rad(v)) end
+
+function sprintf(format,...) print(string.format(format,...)) end
+
+
+function qdr(real,img)
+   if     real>=0 and img>=0 then return 0
+   elseif real< 0 and img>=0 then return 180
+   elseif real< 0 and img< 0 then return 270
+   elseif real>=0 and img< 0 then return 360 end
+end
+--[[
+function g(ang,exp,test)
+   return (ang + (360*test)) / exp  
+   end
+
+function raiz(angulo,exponente)
+   for i=0,exponente-1,1 do
+      print(g(angulo,exponente,i))
+   end
+end
+]]
+
+function plr_rct(amp,face)
+
+   if amp < 0 then
+      print("La amplitud no puede ser negativa")
+   else
+      sprintf("resultado: (%.4f) + (%.4f)i",
+	      amp*math.rcos(face),
+	      amp*math.rsin(face)
+      )
+   end
+end
+
+function rct_plr(rl,img,verbose)
+   local r = (rl^2)+(img^2)
+   local i = math.rec(math.atan(img/rl))
+
+   if verbose then
+      sprintf("r: sqrt( %.4f ) θ: ( %.4f° + %.4f° )",r,i,qdr(rl,img))
+   end
+   
+   sprintf("resultado: ( sqrt( %.4f ) , %.4f° )",r,i+qdr(rl,img))
+end
+
+function trg_plr(mg,ang)
+   sprintf("resultado: ( %.4f  , %.4f° )",mg,ang)
+end
+
+function exp_plr(mg,exp)
+   sprintf("resultado: ( %.4f , %.4f° )",mg,exp*180)
+end
+
+function plr_exp(mg,ang)
+   sprintf("resultado: %.4f e^(i %.4f π)",mg,ang/180)
+end
+

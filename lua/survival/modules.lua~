@@ -1,0 +1,3 @@
+function lambda(f,...)
+   return f(...)
+end

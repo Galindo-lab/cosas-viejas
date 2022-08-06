@@ -1,0 +1,34 @@
+
+
+local BinaryFormat = package.cpath:match("%p[\\|/]?%p(%a+)")
+if BinaryFormat == "dll" then
+    function os.name()
+        return "Windows"
+    end
+elseif BinaryFormat == "so" then
+    function os.name()
+        return "Linux"
+    end
+elseif BinaryFormat == "dylib" then
+    function os.name()
+        return "MacOS"
+    end
+end
+BinaryFormat = nil
+
+ui = {
+   scene = {},
+   create_screen = function(name,screen)
+      ui.scene[name] = table.concat(screen,"\n")
+   end,
+
+   display_screen = function(name)
+      if os.name() == "Linux" or os.name() == "MacOS" then
+	 os.execute("clear")
+      elseif os.name() == "Windows" then
+	 os.execute("cls")
+      end
+	 
+      print(ui.scene[name] or "that screen not exist")
+   end,
+}

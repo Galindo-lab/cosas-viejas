@@ -1,0 +1,9 @@
+generador = require("lib.Generator")
+nodo = require("lib.nodo")
+grafo = require("lib.grafo")
+require("data.city")
+require("framework.tree")
+
+a = nodo()
+
+a:data({hola = "uwu"})

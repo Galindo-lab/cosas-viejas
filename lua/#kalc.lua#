@@ -1,0 +1,89 @@
+function to_frac(num)
+   local W = math.floor(num)
+   local F = num - W
+   local pn, n, N = 0, 1
+   local pd, d, D = 1, 0
+   local x, err, q, Q
+   repeat
+      x = x and 1 / (x - q) or F
+      q, Q = math.floor(x), math.floor(x + 0.5)
+      pn, n, N = n, q*n + pn, Q*n + pn
+      pd, d, D = d, q*d + pd, Q*d + pd
+      err = F - N/D
+   until math.abs(err) < 1e-15
+   return N + D*W, D, err
+end
+
+function print_frac(numer,denom)
+   return string.format("%.14g/%d = %d/%d + %g", numer, denom, to_frac(numer/denom))
+end
+
+function reverse(t)
+  local n = #t
+  local i = 1
+  while i < n do
+    t[i],t[n] = t[n],t[i]
+    i = i + 1
+    n = n - 1li
+  end
+
+  return t
+end
+
+
+
+function formula_general(a,b,c)
+   --determina los numeradores de la divicion, retorna una lista con los valores
+   -- sumados y restados
+   local num = function(a,b,c)
+      local root = function(a,b,c)
+	 return math.sqrt(math.pow(b,2) - (4*a*c))
+      end
+
+      local ms = function(a,b)
+	 return { a + b, a - b }
+      end
+      
+      return ms(-b, root(a,b,c))
+   end
+
+   --divide los valores de la lista 
+   local div = function(values,num)
+      local res = {}
+      
+      for index,value in ipairs(values) do
+	 table.insert(res , print_frac(value,num) )
+      end
+
+      return res
+   end
+   
+   return div(num(a,b,c),2*a)
+end
+
+function plnm(polinomio,eval)
+   --obtiene el valor de un polinomio
+   local res,str = 0,""
+   for index,value in ipairs(reverse(polinomio)) do
+      if(index==#polinomio-1) then
+	 str = string.format("%s + "..str, value.."x^"..index )
+	 res = res + (value * eval^index)
+      else
+	 str = string.format("%s + "..str, value )
+	 res = res + value
+      end
+      
+   end
+
+   return res,str
+end
+
+function evlr_rng(polinomio,de,a,paso)
+   --evalua un polinomio en un rango
+   local a,b = plnm(polinomio,0)
+   print(b)
+   for i = de,a,(paso or 1) do
+      print(string.format("%.4g\t %.g14 ",i, plnm(polinomio,i)))
+   end
+end
+

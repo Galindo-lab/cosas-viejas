@@ -1,0 +1,7 @@
+return {
+	{codigo = "0x12";name = "prueba 1";},
+	{codigo = "0x23";name = "prueba 2";},
+	{codigo = "0x35";name = "prueba 3";},
+	{codigo = "0x34";name = "prueba 4";},
+	{oks = "sdad";},
+}

@@ -1,0 +1,61 @@
+
+
+--[[city = {
+   ["Franco"]= "ok1",
+   ["Scott"]= "ok2",
+   
+   ["Riy"] = {
+      ["Lynn"]= "ok3",
+      ["Graves"]= "ok4",
+      ["Lisa"]= {
+	 ["Smith"]= "ok5",
+      },
+      
+   },
+   ["Lynn"] = {
+      ["Wells"]= "ok6",
+      ["Zakir"]= "ok7",
+      ["Brennan"]= {
+	 ["Muhamed"]= "ok9",
+	 ["Betts"]= "ok10",
+      },
+      ["Armani"]= {
+	 ["Mathilde"]= "ok11",
+	 ["Arroyo"]= "ok12",
+      },
+      
+   },
+   
+   }]]
+
+function lambda(f,...)
+   return f(...)
+end
+
+function printf(...)
+   print(string.format(...))
+end
+
+function treh(tbl,tabs)
+   for key,value in pairs(tbl) do
+      if type(value) == "table" then
+	 printf("%s%s",string.rep("\t",(tabs or 0)),key)
+	 treh(value,(tabs or 0)+1)
+      elseif type(value) ~= "function" then
+	 printf("%s%s %s",string.rep("\t",(tabs or 0)),key,value)
+      end
+   end
+end
+
+function generate_tree(things)
+   local tbl = table
+
+   for i=0,math.random(30) do
+      if math.random(1,10) == 1 then
+	 (tbl):insert("ok")
+      end
+   end
+
+   return tbl
+end
+   

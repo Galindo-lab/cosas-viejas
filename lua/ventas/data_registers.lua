@@ -1,0 +1,1 @@
+return {["0x002"]={["cantidad"]="12",["nombre"]="articulo de prueba 1"}}

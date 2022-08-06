@@ -1,0 +1,11 @@
+function g(real,ang,exp,test)
+	return 
+		math.cos( (ang + (2*math.pi) * test) / exp  ,
+		math.sin( (ang + (2*math.pi) * test) / exp  )
+end
+
+
+print(g(1,180,3,0))
+print(g(1,180,3,1))
+print(g(1,180,3,2))
+

@@ -1,0 +1,15 @@
+ui.create_screen("main",{
+	"",
+	" +---------------+",
+	" | Registros     |",
+	" +---------------+",
+	" |               |",
+	" | 1) Crear      |",
+	" | 2) Buscar     |",
+	" |               |",
+	" +---------------+",
+	" ",
+})
+
+--"oooooooooooooooooooooooooooooooooooooooooooo
+--oooooooooooooooooooooooooooooooooooo",
