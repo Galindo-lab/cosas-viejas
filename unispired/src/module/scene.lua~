@@ -1,0 +1,30 @@
+Scene = {
+    play = function(scene)
+        local ignore = function()end
+
+        love.load = scene.load or ignore
+        love.update = scene.update or ignore
+
+        love.draw = function() 
+            graphics.push()
+
+            -- scale horizontally
+            graphics.scale(love.graphics.getWidth() / game.screen_width)
+            -- or scale vertically
+            --graphics.scale(love.graphics.getHeight() / game.screen_height)
+    
+            -- drawable area
+            graphics.setColor(0,1,0,1)
+            graphics.rectangle("fill", 0,0, game.screen_width, game.screen_height )
+    
+            --restore colors 
+            graphics.setColor(1,1,1,1)
+
+            --draw drawables
+            scene.draw() 
+            graphics.pop()
+        end
+
+        love.keypressed = scene.keypressed or ignore
+    end,
+}

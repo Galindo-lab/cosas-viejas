@@ -1,0 +1,42 @@
+init = {
+    load = function()
+        player.drawable = graphics.newImage("images/player.png")
+    end,
+
+    draw = function()
+
+--       graphics.draw(image.prop(player))
+       graphics.rectangle("fill", player.x, player.y, 8*4, 8*4)
+    end,
+
+    update = function(dt)
+       Scene.play(game_scene)
+       
+        local speed = 200
+        
+        player.x = player.x + player.vx*dt
+        player.y = player.y + player.vy*dt
+
+        if keyboard.isDown("down") then
+            player.vy = speed
+        elseif keyboard.isDown("up") then
+            player.vy = -speed
+        else
+            player.vy = 0
+        end
+
+        if keyboard.isDown("right") then
+            player.vx = speed
+        elseif keyboard.isDown("left") then
+            player.vx = -speed
+        else
+            player.vx = 0
+        end
+
+        if keyboard.isDown("w") then
+            player.r = player.r + (math.rad(100)*dt)
+        elseif keyboard.isDown("s") then
+            player.r = player.r - (math.rad(100)*dt)
+        end
+    end,
+}

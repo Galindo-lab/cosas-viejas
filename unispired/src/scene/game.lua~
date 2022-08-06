@@ -1,0 +1,65 @@
+world = love.physics.newWorld(0, 650, true)
+    -- world:setCallbacks(beginContact, endContact, preSolve, postSolve)
+
+    mint = {
+       forze = 1200,
+    }
+ 
+    ball = {}
+        ball.b = love.physics.newBody(world, 400,200, "dynamic")
+        ball.b:setMass(10)
+        --ball.s = love.physics.newCircleShape(50)
+	ball.s = love.physics.newRectangleShape(50,50)
+        ball.f = love.physics.newFixture(ball.b, ball.s) 
+        ball.f:setRestitution(0)    -- make it bouncy
+        ball.f:setUserData("Ball")
+	
+    static = {}
+        static.b = love.physics.newBody(world, 400,400, "static")
+        static.s = love.physics.newRectangleShape(200,50)
+        static.f = love.physics.newFixture(static.b, static.s)
+        static.f:setUserData("Block")
+
+game_scene = {
+   load = function()
+      
+   end,
+
+   draw = function() 
+love.graphics.circle("line", ball.b:getX(),ball.b:getY(), ball.s:getRadius(), 20)
+   love.graphics.push()
+   love.graphics.scale(love.graphics.getWidth() / 960)
+    love.graphics.polygon("line",   ball.b:getWorldPoints(  ball.s:getPoints()))
+    love.graphics.polygon("fill", static.b:getWorldPoints(static.s:getPoints()))
+    love.graphics.pop()
+
+    print(ball.b:getX())
+   end,
+
+   update = function(dt)
+           world:update(dt)
+ 
+    if love.keyboard.isDown("right") then
+        ball.b:applyForce(1000, 0)
+    elseif love.keyboard.isDown("left") then
+        ball.b:applyForce(-1000, 0)
+    end
+    if love.keyboard.isDown("up") then
+       ball.b:applyForce(0, -2000)
+       --ball.b:applyLinearImpulse(0,-10)
+    elseif love.keyboard.isDown("down") then
+        ball.b:applyForce(0, 1000)
+    end
+
+    if love.keyboard.isDown("a") then
+       ball.b:applyTorque(1000)
+       --ball.b:setAngle(0)
+    end
+
+    if love.keyboard.isDown("z") then
+       mint.forze = mint.forze + 1
+    end
+
+    --ball.b:setAngle(0)
+   end,
+}

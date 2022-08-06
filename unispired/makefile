@@ -1,0 +1,6 @@
+
+
+output:
+	love2d /home/luis/programacion/unispired/
+
+

@@ -1,0 +1,19 @@
+
+
+(var player
+     {:data
+       {:int  0 :will 0 :pre  0    ;Mental Group
+        :tech 0 :ref  0 :dex  0    ;Combat Group 
+        :con  0 :str  0 :body 0}   ;Physical Group
+      })
+
+
+(fn derived-characteristics [char]
+  {:stun (* char.body )
+   })
+
+
+  ;{:stun (* char.body 5)
+  ; :hits (* char.body 5)
+  ; })
+

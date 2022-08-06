@@ -1,0 +1,30 @@
+folders = {
+    {
+        name = "game",
+        files = {
+            "globals"
+        }
+    },
+    {   
+        name = "module",
+        files = {
+            "scene",
+            "image",
+	    "map"
+        },
+    },
+    {   
+        name = "entities",
+        files = {
+	   "player",
+	   "world",
+        }
+    },
+    {
+        name = "scene",
+        files = {
+	   "init",
+	   "game",
+        }
+    },
+}

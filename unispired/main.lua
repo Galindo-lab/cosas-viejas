@@ -1,0 +1,87 @@
+require("init.load")
+
+Scene.play(init)
+
+
+--[[function love.load()
+    world = love.physics.newWorld(0, 650, true)
+    -- world:setCallbacks(beginContact, endContact, preSolve, postSolve)
+
+    mint = {
+       forze = 1200,
+    }
+ 
+    ball = {}
+        ball.b = love.physics.newBody(world, 400,200, "dynamic")
+        ball.b:setMass(10)
+        --ball.s = love.physics.newCircleShape(50)
+	ball.s = love.physics.newRectangleShape(50,50)
+        ball.f = love.physics.newFixture(ball.b, ball.s) 
+        ball.f:setRestitution(0)    -- make it bouncy
+        ball.f:setUserData("Ball")
+	
+    static = {}
+        static.b = love.physics.newBody(world, 400,400, "static")
+        static.s = love.physics.newRectangleShape(200,50)
+        static.f = love.physics.newFixture(static.b, static.s)
+        static.f:setUserData("Block")
+ 
+    text       = ""   -- we'll use this to put info text on the screen later
+    persisting = 0    -- we'll use this to store the state of repeated callback calls
+end
+ function love.update(dt)
+    world:update(dt)
+ 
+    if love.keyboard.isDown("right") then
+        ball.b:applyForce(1000, 0)
+    elseif love.keyboard.isDown("left") then
+        ball.b:applyForce(-1000, 0)
+    end
+    if love.keyboard.isDown("up") then
+       --ball.b:applyForce(0, -mint.forze)
+       ball.b:applyLinearImpulse(0,-10)
+    elseif love.keyboard.isDown("down") then
+        ball.b:applyForce(0, 1000)
+    end
+
+    if love.keyboard.isDown("a") then
+       ball.b:applyTorque(1000)
+    end
+
+    if love.keyboard.isDown("z") then
+       mint.forze = mint.forze + 1
+    end
+
+    
+ 
+    if string.len(text) > 768 then    -- cleanup when 'text' gets too long
+        text = ""
+    end
+end
+ 
+function love.draw()
+   --love.graphics.circle("line", ball.b:getX(),ball.b:getY(), ball.s:getRadius(), 20)
+   love.graphics.push()
+   love.graphics.scale(love.graphics.getWidth() / 960)
+    love.graphics.polygon("line",   ball.b:getWorldPoints(  ball.s:getPoints()))
+    love.graphics.polygon("fill", static.b:getWorldPoints(static.s:getPoints()))
+    love.graphics.pop()
+
+    print(ball.b:getX())
+end
+ 
+function beginContact(a, b, coll)
+   
+end
+ 
+function endContact(a, b, coll)
+   
+end
+ 
+function preSolve(a, b, coll)
+   
+end
+ 
+function postSolve(a, b, coll, normalimpulse, tangentimpulse)
+end
+]]--

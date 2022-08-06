@@ -1,0 +1,19 @@
+
+vars
+	player
+	:x	coordenada x en la pantalla (ojo: En la pantalla)
+	:y	coordenada y en la pantalla 
+	:frame	fotograma de la animacion
+	
+			  values de frame
+		:482	caminar arriba o abajo  
+		:483	estar quiero
+		:485	camianar derecha o izquierda
+		
+	:moving	sí el jugador se esta moviendo
+	:flip	girar al personaje
+	:speed	velocidad del personaje (0 a n)
+	:map-x	coordenada x en el mapa
+	:map-y	coordenada y en el mapa
+
+function 
